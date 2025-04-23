@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Update Review{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Update Your Review for {{ product.title }}</h1>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Edit Your Review</h4>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Rating Input -->
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating (1 to 5):</label>
+                    <select name="rating" id="rating" class="form-select" required>
+                        <option value="">Select a rating</option>
+                        <option value="1" {% if review.rating == 1 %}selected{% endif %}>1 - Poor</option>
+                        <option value="2" {% if review.rating == 2 %}selected{% endif %}>2 - Fair</option>
+                        <option value="3" {% if review.rating == 3 %}selected{% endif %}>3 - Good</option>
+                        <option value="4" {% if review.rating == 4 %}selected{% endif %}>4 - Very Good</option>
+                        <option value="5" {% if review.rating == 5 %}selected{% endif %}>5 - Excellent</option>
+                    </select>
+                </div>
+
+                <!-- Message Input -->
+                <div class="mb-3">
+                    <label for="message" class="form-label">Review Message:</label>
+                    <textarea name="message" id="message" class="form-control" rows="4" required>{{ review.message }}</textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Update Review</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{% url 'product_reviews' product.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

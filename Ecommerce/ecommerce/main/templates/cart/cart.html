@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load cart_filters %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Your Cart</h1>
+
+    {% if cart_items %}
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>
+                    <a href="{% url 'view_product' id=item.product.id %}">{{ item.product.title }}</a>
+                </td>
+                <td>${{ item.product.price|floatformat:2 }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.quantity|multiply:item.product.price|floatformat:2 }}</td>
+                <td>
+                    <a href="{% url 'add_to_cart' item.product.id %}" class="btn btn-success btn-sm">+</a>
+                    <a href="{% url 'remove_from_cart' item.product.id %}" class="btn btn-danger btn-sm">-</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                <td colspan="2">${{ cart.items.all|cart_total_price }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <br><br>
+    <!-- Order Form -->
+    <form method="post" action="{% url 'create_order' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="address" class="form-label">Delivery Address:</label>
+            <textarea name="address" id="address" rows="3" class="form-control" placeholder="Enter your delivery address" required></textarea>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Place Order</button>
+        </div>
+    </form>
+    {% else %}
+    <p class="text-center">Your cart is empty. <a href="{% url 'all_products' %}">Browse products</a> to add items to your cart.</p>
+    {% endif %}
+</div>
+{% endblock %}

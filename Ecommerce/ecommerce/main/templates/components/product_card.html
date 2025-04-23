@@ -1,0 +1,20 @@
+<div class="card h-100">
+    <a href="{% url 'view_product' id=product.id %}">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 250px; object-fit: cover;">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title text-truncate">{{ product.title }}</h5>
+        <p class="card-text text-truncate">{{ product.description }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted">${{ product.price }}</span>
+            {% if product.stock > 0 %}
+            <span class="badge bg-success">In Stock</span>
+            {% else %}
+            <span class="badge bg-danger">Out of Stock</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <a href="{% url 'view_product' id=product.id %}" class="btn btn-primary btn-sm">View Details</a>
+    </div>
+</div>

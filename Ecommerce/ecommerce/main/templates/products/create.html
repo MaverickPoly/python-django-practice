@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Create Product{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Create New Product</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Product Title:</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter product title" required>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+                        </div>
+
+                        <!-- Stock -->
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Stock:</label>
+                            <input type="number" name="stock" id="stock" class="form-control" placeholder="Enter available stock" min="0" required>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price:</label>
+                            <input type="number" name="price" id="price" class="form-control" placeholder="Enter product price" min="0" step="0.01" required>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category:</label>
+                            <input type="text" name="category" id="category" class="form-control" placeholder="Enter category title" required>
+                        </div>
+
+                        <!-- Product Image -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Product Image:</label>
+                            <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Product</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'all_products' %}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

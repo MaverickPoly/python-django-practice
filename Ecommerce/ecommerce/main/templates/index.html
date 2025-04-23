@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce App</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <div class="top">
+      <h3>Maverick Polymath</h3>
+      <p>
+        Welcome to this super cool Ecommerce Application made using Django and
+        Bootstrap! Explore the functionality of the project at its full
+        brightness!
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="auth">
+        <h2>Auth Links</h2>
+        <a href="{% url 'login_view' %}">Login</a>
+        <a href="{% url 'register_view' %}">Register</a>
+      </div>
+      <div class="products">
+        <h2>Product Links</h2>
+        <a href="{% url 'all_products' %}">Products</a>
+        <a href="{% url 'create_product' %}">Create Product</a>
+        <a href="{% url 'cart_view' %}">Cart</a>
+        <a href="{% url 'my_profile' %}">Profile</a>
+      </div>
+    </div>
+  </body>
+</html>

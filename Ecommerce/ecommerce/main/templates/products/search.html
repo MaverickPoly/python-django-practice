@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Search Results</h1>
+    <p class="text-center">
+        {% if search %}
+        Results for <strong>"{{ search }}"</strong>
+        {% endif %}
+        {% if category %}
+        in category <strong>"{{ category }}"</strong>
+        {% endif %}
+    </p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for product in products %}
+        <div class="col">
+            {% include "components/product_card.html" %}
+        </div>
+        {% empty %}
+        <div class="text-center">
+            <p>No products match your search criteria.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

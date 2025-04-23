@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>{{ profile.user.username }}'s Profile</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Profile Image -->
+                    <div class="text-center mb-4">
+                        {% if profile.profile_img %}
+                        <img src="{{ profile.profile_img.url }}" alt="Profile Image" class="rounded-circle" width="150" height="150">
+                        {% else %}
+                        <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Image" class="rounded-circle" width="150" height="150">
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <!-- First Name -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>First Name:</strong>
+                                <p>{{ profile.user.first_name }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>Last Name:</strong>
+                                <p>{{ profile.user.last_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Bio -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>Bio:</strong>
+                                <p>{{ profile.bio }}</p>
+                            </div>
+                        </div>
+
+                        <!-- User Type -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>User Type:</strong>
+                                <p>{{ profile.user_type }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Country -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>Country:</strong>
+                                <p>{{ profile.country }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Created At -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>Profile Created:</strong>
+                                <p>{{ profile.created_at|date:"M d, Y H:i" }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Updated At -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>Last Updated:</strong>
+                                <p>{{ profile.updated_at|date:"M d, Y H:i" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'edit_profile' user_id=profile.user.id %}" class="btn btn-warning">Edit Profile</a>
+                    <a href="{% url 'change_password_view' %}" class="btn btn-secondary">Change password</a>
+                    <a href="{% url 'logout_view' %}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

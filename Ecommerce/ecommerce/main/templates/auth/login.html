@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container-md">
+    <form method="post">
+        {% csrf_token %}
+        <h1 class="text-center p-3">Login Form</h1>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Password:</label>
+            <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" required>
+        </div>
+
+        <button class="btn btn-primary btn-lg w-100" type="submit">Login</button>
+    </form>
+
+    <p class="mt-3 text-center">
+        Don't have an account? <a href="{% url 'register_view' %}">Sign up here</a>
+    </p>
+</div>
+{% endblock %}

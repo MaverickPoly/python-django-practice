@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h1>{{ product.title }}</h1>
+            <a class="btn-link" href="{% url 'profile_view' user_id=product.author.id %}">Seller: {{ product.author.username }}</a>
+            <p class="text-muted">Category: {{ product.category.title }}</p>
+            <p class="lead">{{ product.description }}</p>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Stock -->
+                {% if product.stock > 0 %}
+                <span class="badge bg-success">In Stock: {{ product.stock }}</span>
+                {% else %}
+                <span class="badge bg-danger">Out of Stock</span>
+                {% endif %}
+
+                <!-- Price -->
+                <span class="fs-4 text-primary">${{ product.price }}</span>
+            </div>
+
+            <!-- Links for Creator -->
+            {% if product.author == user %}
+            <div class="mt-3">
+                <a href="{% url 'update_product' id=product.id %}" class="btn btn-warning me-2">Update Product</a>
+                <a href="{% url 'delete_product' id=product.id %}" class="btn btn-danger">Delete Product</a>
+            </div>
+            {% endif %}
+
+            <!-- Details for Regular Users -->
+            {% if product.author != user %}
+            
+            {% if user.is_authenticated and product.stock > 0 %}
+            <div class="mt-3">
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success">Add to Cart</a>
+                <a href="{% url 'remove_from_cart' product.id %}" class="btn btn-danger">Remove from Cart</a>
+            </div>
+            {% endif %}
+
+            <div class="mt-3">
+                <a href="{% url 'product_reviews' product.id %}" class="btn btn-secondary me-2">View Reviews</a>
+                <span class="badge bg-primary">Orders: {{ product.orders.count }}</span>
+                <span class="badge bg-warning text-dark">Rating: {{ product.rating|default:"Not Rated" }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
