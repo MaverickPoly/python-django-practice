@@ -1,39 +1,43 @@
+# Ecommerce Project 🛒
+
+Fully completed Django Ecommerce Project.
+
+## Technology Used
+
+- Django
+- Bootstrap
+
+## Functionality
+
+### Authentication
+
+- Login, Register, Logout, Change Password
+
+### Profile
+
+- Profile Information, Profile Images, Edit Profile, View profiles
+- Profile Types (Seller, Client)
+
+### Products
+
+- Create Product, View Products, Delete and Update them.
+- Create Category, Products with categories
+- Search and filter Products.
+- Rating for Products, View them, update and delete.
+
+### Cart functionality
+
+- Add Products to Cart, remove them.
+- Make Order from cart, Order History
+- Update Order Statuses
+
+## How to Run
+
+First make a pull request of the repository. Then install `django` framework. Optionally, you can create seperate virtual environment.
+Then you can run the project after migrations:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
 ```
-git remote add origin https://github.com/MaverickPoly/python-django-practice.git
-```
-
-### Phase 1: Core Product Catalog and Basic Shopping
-
-- Product Management (Admin)
-- Category Management (Admin)
-- Product Listing (Frontend)
-- Product Detail View (Frontend)
-- Add to Cart
-- Display Cart
-- Update Cart Quantity
-- Remove from Cart
-
-### Phase 2: User Accounts and Order Management
-
-- User Registration
-- User Login/Logout
-- Shipping Information Collection
-- Order Submission
-- Order Model
-- Order Items Model
-- Order History (User)
-- Order Details (User)
-
-### Phase 3: Enhancements and User Interaction
-
-- Product Ratings (Display & Submission)
-- Product Comments (Display & Submission)
-- Product Search
-
-### Phase 4: Advanced Features (Consider Later)
-
-- Wishlist
-- Payment Gateway Integration
-- Admin Order Management
-- Inventory Management
-- Product Recommendations
